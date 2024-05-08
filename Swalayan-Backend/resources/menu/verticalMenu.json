@@ -1,0 +1,147 @@
+{
+  "menu": [
+    {
+      "url": "/dashboard-analytics",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons mdi mdi-home-outline",
+      "slug": "dashboard-analytics"
+    },
+    {
+      "menuHeader": "Apps & Pages"
+    },
+    {
+      "url": "/users",
+      "icon": "menu-icon tf-icons mdi mdi-account-outline",
+      "name": "Users",
+      "slug": "users",
+      "submenu": [
+        {
+          "url": "/users",
+          "name": "Data",
+          "slug": "users.index"
+        },
+        {
+          "url": "/users/create",
+          "name": "Create",
+          "slug": "users.create"
+        }
+      ]
+    },
+    {
+      "url": "/supplier",
+      "icon": "menu-icon tf-icons mdi mdi-factory",
+      "name": "Supplier",
+      "slug": "supplier.index"
+    },
+    {
+      "url": "/produk",
+      "icon": "menu-icon tf-icons mdi mdi-warehouse",
+      "name": "Produk",
+      "slug": "produk.index"
+    },
+    {
+      "url": "/transaksi",
+      "icon": "menu-icon tf-icons mdi mdi-cash",
+      "name": "Transaksi",
+      "slug": "transaksi.index"
+    }
+  ],
+  "menu_inventaris": [
+    {
+      "url": "dashboard-warehouse",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons mdi mdi-home-outline",
+      "slug": "dashboard-warehouse"
+    },
+    {
+      "menuHeader": "Apps & Pages"
+    },
+    {
+      "url": "#",
+      "icon": "menu-icon tf-icons mdi mdi-factory",
+      "name": "Supplier",
+      "slug": "supplier",
+      "submenu": [
+        {
+          "url": "/supplier",
+          "name": "Data",
+          "slug": "supplier.index"
+        },
+        {
+          "url": "/supplier/create",
+          "name": "Create",
+          "slug": "supplier.create"
+        }
+      ]
+    },
+    {
+      "url": "#",
+      "icon": "menu-icon tf-icons mdi mdi-warehouse",
+      "name": "Produk",
+      "slug": "produk",
+      "submenu": [
+        {
+          "url": "/produk/kategori",
+          "name": "Kategori",
+          "slug": "produk.kategori.index"
+        },
+        {
+          "url": "/produk/kategori/create",
+          "name": "Create Kategori",
+          "slug": "produk.kategori.create"
+        },
+        {
+          "url": "/produk",
+          "name": "Data",
+          "slug": "produk.index"
+        },
+        {
+          "url": "/produk/create",
+          "name": "Create",
+          "slug": "produk.create"
+        }
+      ]
+    },
+    {
+      "url": "#",
+      "icon": "menu-icon tf-icons mdi mdi-warehouse",
+      "name": "On Supply",
+      "slug": "on-supply",
+      "submenu": [
+        {
+          "url": "/on-supply",
+          "name": "Data",
+          "slug": "on-supply.index"
+        },
+        {
+          "url": "/on-supply/create",
+          "name": "Create",
+          "slug": "on-supply.create"
+        }
+      ]
+    }
+  ],
+  "menu_kasir": [
+    {
+      "url": "/dashboard-pos",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons mdi mdi-home-outline",
+      "slug": "dashboard-pos"
+    },
+    {
+      "menuHeader": "Apps & Pages"
+    },
+    {
+      "url": "#",
+      "icon": "menu-icon tf-icons mdi mdi-factory",
+      "name": "Transaksi",
+      "slug": "transaksi"
+    },
+    {
+      "url": "#",
+      "icon": "menu-icon tf-icons mdi mdi-warehouse",
+      "name": "Point of Sales Online",
+      "slug": "pos-online"
+    }
+  ]
+}

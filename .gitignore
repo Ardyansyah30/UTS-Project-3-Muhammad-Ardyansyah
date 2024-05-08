@@ -1,7 +1,7 @@
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+/Swalayan-Backend/vendor/
+/Swalayan-Backend/node_modules/
+/Swalayan-Backend/npm-debug.log
+/Swalayan-Backend/yarn-error.log
 
 # Laravel 4 specific
 bootstrap/compiled.php
@@ -16,7 +16,7 @@ public_html/storage
 public_html/hot
 
 storage/*.key
-.env
+/Swalayan-Backend/.env
 Homestead.yaml
 Homestead.json
 /.vagrant
