@@ -12,7 +12,7 @@ class KategoriProduk extends Model
 
   protected $table = 'kategori_produk';
   protected $primaryKey = 'id_kategori';
-  protected $fillable = ['nama_kategori', 'ketarangan'];
+  protected $fillable = ['nama_kategori', 'keterangan'];
   public $timestamps = false;
 
   public function produk(): HasMany

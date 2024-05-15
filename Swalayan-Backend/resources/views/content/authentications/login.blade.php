@@ -32,8 +32,13 @@
 
                             <div class="form-floating form-floating-outline mb-3">
                                 <input name="email" type="text" class="form-control" id="email"
-                                    placeholder="Enter your email or username" autofocus>
+                                    placeholder="Enter your email or username" autofocus required>
                                 <label for="email">Email</label>
+                                @if (count($errors) > 0)
+                                    <div class="form-text text-danger">
+                                        {{ $errors->first('email') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <div class="form-password-toggle">
@@ -41,14 +46,26 @@
                                         <div class="form-floating form-floating-outline">
                                             <input name="password" type="password" id="password" class="form-control"
                                                 placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                aria-describedby="password" />
+                                                aria-describedby="password" required />
                                             <label for="password">Password</label>
                                         </div>
                                         <span class="input-group-text cursor-pointer"><i
                                                 class="mdi mdi-eye-off-outline"></i></span>
                                     </div>
                                 </div>
+                                @if (count($errors) > 0)
+                                    <div class="form-text text-danger">
+                                        {{ $errors->first('password') }}
+                                    </div>
+                                @endif
                             </div>
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger border-left-danger" role="alert">
+                                    <ul class="pl-4 my-2">
+                                        <li>{{ $errors->first('auth') }}</li>
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="mb-3">
                                 <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                             </div>

@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\InventarisMiddelware;
 use App\Http\Middleware\KasirMiddleware;
+use App\Http\Middleware\ProfileMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -43,7 +44,7 @@ class Kernel extends HttpKernel
 
     'api' => [
       // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-      \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+      \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
       \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ],
   ];
@@ -71,5 +72,6 @@ class Kernel extends HttpKernel
     'admin' => AdminMiddleware::class,
     'inventaris' => InventarisMiddelware::class,
     'kasir' => KasirMiddleware::class,
+    'profile' => ProfileMiddleware::class,
   ];
 }

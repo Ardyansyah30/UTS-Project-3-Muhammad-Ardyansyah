@@ -60,8 +60,8 @@
                                 </div>
                             </div>
                             <div class="flex-grow-1">
-                                <h6 class="mb-0">John Doe</h6>
-                                <small class="text-muted">Admin</small>
+                                <h6 class="mb-0">{{ Auth()->user()->email }}</h6>
+                                <small class="text-muted">{{ Auth()->user()->role }}</small>
                             </div>
                         </div>
                     </a>
@@ -71,7 +71,7 @@
                         <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="javascript:void(0);">
+                        <a class="dropdown-item" href="{{ route('profile.index') }}">
                             <i class="mdi mdi-account-outline me-1 mdi-20px"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
@@ -82,7 +82,7 @@
                         <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="javascript:void(0);">
+                        <a class="dropdown-item" href="{{ route('change-password') }}">
                             <i class="mdi mdi-lock-open-outline me-1 mdi-20px"></i>
                             <span class="align-middle">Change Password</span>
                         </a>
@@ -92,7 +92,7 @@
                     <div class="dropdown-divider my-1"></div>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal">
                         <i class='mdi mdi-power me-1 mdi-20px'></i>
                         <span class="align-middle">Log Out</span>
                     </a>
@@ -109,7 +109,7 @@
 </nav>
 <!-- / Navbar -->
 
-<!-- Modal -->
+<!-- Logout Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

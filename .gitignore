@@ -2,6 +2,7 @@
 /Swalayan-Backend/node_modules/
 /Swalayan-Backend/npm-debug.log
 /Swalayan-Backend/yarn-error.log
+/Swalayan-Backend/public/assets/img/produk/
 
 # Laravel 4 specific
 bootstrap/compiled.php

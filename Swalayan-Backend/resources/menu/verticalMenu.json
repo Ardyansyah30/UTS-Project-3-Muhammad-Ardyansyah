@@ -22,28 +22,28 @@
         },
         {
           "url": "/users/create",
-          "name": "Create",
+          "name": "Create/Edit",
           "slug": "users.create"
         }
       ]
     },
     {
-      "url": "/supplier",
+      "url": "/admin/supplier",
       "icon": "menu-icon tf-icons mdi mdi-factory",
       "name": "Supplier",
-      "slug": "supplier.index"
+      "slug": "admin.supplier.index"
     },
     {
-      "url": "/produk",
+      "url": "/admin/produk",
       "icon": "menu-icon tf-icons mdi mdi-warehouse",
       "name": "Produk",
-      "slug": "produk.index"
+      "slug": "admin.produk.index"
     },
     {
-      "url": "/transaksi",
+      "url": "/admin/transaksi",
       "icon": "menu-icon tf-icons mdi mdi-cash",
       "name": "Transaksi",
-      "slug": "transaksi.index"
+      "slug": "admin.transaksi.index"
     }
   ],
   "menu_inventaris": [
@@ -57,7 +57,7 @@
       "menuHeader": "Apps & Pages"
     },
     {
-      "url": "#",
+      "url": "/supplier",
       "icon": "menu-icon tf-icons mdi mdi-factory",
       "name": "Supplier",
       "slug": "supplier",
@@ -69,13 +69,13 @@
         },
         {
           "url": "/supplier/create",
-          "name": "Create",
+          "name": "Create/Edit",
           "slug": "supplier.create"
         }
       ]
     },
     {
-      "url": "#",
+      "url": "/produk",
       "icon": "menu-icon tf-icons mdi mdi-warehouse",
       "name": "Produk",
       "slug": "produk",
@@ -83,12 +83,12 @@
         {
           "url": "/produk/kategori",
           "name": "Kategori",
-          "slug": "produk.kategori.index"
+          "slug": "kategori.index"
         },
         {
           "url": "/produk/kategori/create",
-          "name": "Create Kategori",
-          "slug": "produk.kategori.create"
+          "name": "Create/Edit Kategori",
+          "slug": "kategori.create"
         },
         {
           "url": "/produk",
@@ -97,13 +97,13 @@
         },
         {
           "url": "/produk/create",
-          "name": "Create",
+          "name": "Create/Edit",
           "slug": "produk.create"
         }
       ]
     },
     {
-      "url": "#",
+      "url": "/on-supply",
       "icon": "menu-icon tf-icons mdi mdi-warehouse",
       "name": "On Supply",
       "slug": "on-supply",
@@ -132,14 +132,14 @@
       "menuHeader": "Apps & Pages"
     },
     {
-      "url": "#",
-      "icon": "menu-icon tf-icons mdi mdi-factory",
+      "url": "/transaksi/list",
+      "icon": "menu-icon tf-icons mdi mdi-cash",
       "name": "Transaksi",
       "slug": "transaksi"
     },
     {
-      "url": "#",
-      "icon": "menu-icon tf-icons mdi mdi-warehouse",
+      "url": "/pos-online",
+      "icon": "menu-icon tf-icons mdi mdi-cash",
       "name": "Point of Sales Online",
       "slug": "pos-online"
     }

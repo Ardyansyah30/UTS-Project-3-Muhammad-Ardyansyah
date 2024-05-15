@@ -13,6 +13,9 @@
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="mb-0">Data Produk</h5>
                 </div>
+                <div class="card-body" style="width: 15rem;">
+                    <img src="{{ asset($produk->img_url) }}" class="card-img-top" alt="...">
+                </div>
                 <div class="card-body">
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Nama Produk</label>
@@ -42,7 +45,8 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Kategori Produk</label>
                         <label class="col-sm-1 col-form-label">:</label>
-                        <label class="col-sm-8 col-form-label">{{ $produk->kategori->nama_kategori }}</label>
+                        <label
+                            class="col-sm-8 col-form-label">{{ $kategori = $produk->kategori ? $produk->kategori->nama_kategori : 'No Kategori Data' }}</label>
                     </div>
                 </div>
             </div>

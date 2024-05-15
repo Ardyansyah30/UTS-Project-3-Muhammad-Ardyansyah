@@ -27,18 +27,36 @@ class DetailTransaksiSeeder extends Seeder
                     "biaya" => "15000",
                     'transaksi_id' => "1"
                 ],
-                [
-                    "produk_id" => "1",
-                    "quantity" => "1",
-                    "biaya" => "30000",
-                    'transaksi_id' => "2"
-                ],
-                [
-                    "produk_id" => "2",
-                    "quantity" => "2",
-                    "biaya" => "30000",
-                    'transaksi_id' => "2"
-                ],
+                // [
+                //     "produk_id" => "1",
+                //     "quantity" => "1",
+                //     "biaya" => "30000",
+                //     'transaksi_id' => "2"
+                // ],
+                // [
+                //     "produk_id" => "2",
+                //     "quantity" => "2",
+                //     "biaya" => "30000",
+                //     'transaksi_id' => "2"
+                // ],
+                // [
+                //     "produk_id" => "3",
+                //     "quantity" => "5",
+                //     "biaya" => "50000",
+                //     'transaksi_id' => "3"
+                // ],
+                // [
+                //     "produk_id" => "3",
+                //     "quantity" => "1",
+                //     "biaya" => "10000",
+                //     'transaksi_id' => "4"
+                // ],
+                // [
+                //     "produk_id" => "2",
+                //     "quantity" => "2",
+                //     "biaya" => "30000",
+                //     'transaksi_id' => "5"
+                // ],
             ];
 
         DetailTransaksi::insert($detailTransaksi);

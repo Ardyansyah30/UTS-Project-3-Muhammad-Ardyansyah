@@ -1,13 +1,20 @@
 <?php
 
+use App\Http\Controllers\admin\LaporanController;
+use App\Http\Controllers\admin\ProdukController as AdminProdukController;
+use App\Http\Controllers\admin\SupplierController as AdminSupplierController;
+use App\Http\Controllers\admin\TransaksiController as AdminTransaksiController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\authentications\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\authentications\ForgotPasswordBasic;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\TransaksiController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\inventaris\KategoriProdukController;
+use App\Http\Controllers\inventaris\OnSupplyController;
+use App\Http\Controllers\inventaris\ProdukController;
+use App\Http\Controllers\inventaris\SupplierController;
+use App\Http\Controllers\kasir\POSOnlineCOntroller;
+use App\Http\Controllers\kasir\TransaksiController;
+use App\Http\Controllers\ProfileController;
 
 // Main Page Route
 Route::get('/', function () {
@@ -42,29 +49,76 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', UserController::class);
 
         // Supplier pages
-        Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
-        Route::get('/supplier/{supplier}', [SupplierController::class, 'show'])->name('supplier.show');
+        Route::get('/admin/supplier', [AdminSupplierController::class, 'index'])->name('admin.supplier.index');
+        Route::get('/admin/supplier/{supplier}', [AdminSupplierController::class, 'show'])->name('admin.supplier.show');
 
         // Produk pages
-        Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
-        Route::get('/produk/{produk}', [ProdukController::class, 'show'])->name('produk.show');
+        Route::get('/admin/produk', [AdminProdukController::class, 'index'])->name('admin.produk.index');
+        Route::get('/admin/produk/{produk}', [AdminProdukController::class, 'show'])->name('admin.produk.show');
 
         // Transaksi pages
-        Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-        Route::get('/transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaksi.show');
+        Route::get('/admin/transaksi', [AdminTransaksiController::class, 'index'])->name('admin.transaksi.index');
+        Route::get('/admin/{transaksi}', [AdminTransaksiController::class, 'show'])->name('admin.transaksi.show');
+
+        // Laporan
+        Route::post('/laporan-bulanan', [LaporanController::class, 'laporanBulanan'])->name('laporan.bulanan');
+        Route::post('/laporan-tahunan', [LaporanController::class, 'laporanTahunan'])->name('laporan.tahunan');
+
+        // Change-Password
+        Route::get('/change-password', [AuthController::class, 'changePassword'])->name('change-password');
+        Route::post('/change-password/{user}', [AuthController::class, 'updatePassword'])->name('update-password');
     });
 
     // Middleware Inventaris
     Route::middleware('inventaris')->group(function () {
         // Dashboard
         Route::get('/dashboard-warehouse', [DashboardController::class, 'warehouse'])->name('dashboard-warehouse');
+
+        // Supplier pages
+        Route::resource('supplier', SupplierController::class);
+
+        // Kategori pages
+        Route::resource('produk/kategori', KategoriProdukController::class);
+
+        // Produk pages
+        Route::resource('produk', ProdukController::class);
+
+        // On-Supply pages
+        Route::get('/on-supply', [OnSupplyController::class, 'index'])->name('on-supply.index');
+        Route::get('/on-supply/create', [OnSupplyController::class, 'create'])->name('on-supply.create');
+        Route::post('/on-supply', [OnSupplyController::class, 'store'])->name('on-supply.store');
+        Route::get('/on-supply/{id}', [OnSupplyController::class, 'show'])->name('on-supply.show');
+        Route::get('/on-supply/{on-supply}/edit', [OnSupplyController::class, 'edit'])->name('on-supply.edit');
+        Route::put('/on-supply/{on-supply}', [OnSupplyController::class, 'update'])->name('on-supply.update');
+        Route::delete('/on-supply/{on-supply}', [OnSupplyController::class, 'destroy'])->name('on-supply.delete');
     });
 
     // Middleware Kasir
     Route::middleware('kasir')->group(function () {
         // Dashboard
         Route::get('/dashboard-pos', [DashboardController::class, 'pointOfSales'])->name('dashboard-pos');
+
+        // Transaksi
+        Route::post('/transaksi', [TransaksiController::class, 'transaksi'])->name('transaksi');
+        Route::get('/transaksi/list', [TransaksiController::class, 'index'])->name('transaksi.index');
+        Route::get('/transaksi/{transaksi}', [TransaksiController::class, 'show'])->name('transaksi.show');
+        Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
+
+        // Point of Sales Online
+        Route::get('/pos-online', [POSOnlineCOntroller::class, 'index'])->name('pos-online.index');
+        Route::post('/pos-online/{transaksi}', [POSOnlineCOntroller::class, 'complete'])->name('pos-online.complete');
+        Route::get('/pos-online/{transaksi}/show', [POSOnlineCOntroller::class, 'show'])->name('pos-online.show');
+
+        // Redirect
+        Route::get('/transaksi', function () {
+            return redirect('/dashboard-pos');
+        });
+    });
+
+    // Middleware Profile
+    Route::middleware('profile')->group(function () {
+        // Profile
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     });
 });
-
-Route::get('/auth/forgot-password-basic', [ForgotPasswordBasic::class, 'index'])->name('auth-reset-password-basic');

@@ -13,13 +13,13 @@ return new class extends Migration
   {
     Schema::create('produk', function (Blueprint $table) {
       $table->increments('id_produk');
-      $table->string('nama_produk', 15);
+      $table->string('nama_produk', 80);
       $table->integer('harga_produk');
       $table->integer('stock');
       $table->string('status', 10);
-      $table->string('deskripsi', 50);
-      $table->string('img_url', 50);
-      $table->unsignedInteger('kategori_id');
+      $table->string('deskripsi', 80);
+      $table->string('img_url', 100);
+      $table->unsignedInteger('kategori_id')->nullable();
       $table->foreign('kategori_id')->references('id_kategori')->on('kategori_produk');
     });
   }

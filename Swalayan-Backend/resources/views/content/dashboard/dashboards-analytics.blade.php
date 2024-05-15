@@ -17,6 +17,14 @@
 @section('content')
     <div class="row gy-4">
 
+        <div class="col-lg-8">
+            @if (session()->has('pesan'))
+                <div class="alert alert-success mb-4" role="alert">
+                    {{ session('pesan') }}
+                </div>
+            @endif
+        </div>
+
         <!-- Transactions -->
         <div class="col-lg-8">
             <div class="card">
@@ -30,7 +38,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
                                 <a class="dropdown-item" href="{{ route('dashboard-analytics') }}">Refresh</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Report</a>
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#reportModal">Report</a>
                             </div>
                         </div>
                     </div>
@@ -94,5 +102,85 @@
             </div>
         </div>
         <!--/ Transactions -->
+
+        <!-- Report Modal -->
+        <div class="modal fade" id="reportModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel1">Laporan Penjualan</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#modalBulanan" data-bs-toggle="modal"
+                            data-bs-dismiss="modal">Bulanan</button>
+                        <button class="btn btn-secondary" data-bs-target="#modalTahunan" data-bs-toggle="modal"
+                            data-bs-dismiss="modal">Tahunan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Modal Bulanan -->
+        <div class="modal fade" id="modalBulanan" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel1">Laporan Penjualan Bulanan</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('laporan.bulanan') }}" method="post">
+                            @csrf
+                            <div class="row mb-2">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline mb-6">
+                                        <input name="tanggal" class="form-control" type="month" id="html5-month-input"
+                                            required />
+                                        <label for="html5-month-input">Month and Year</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Modal Tahunan -->
+        <div class="modal fade" id="modalTahunan" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel1">Laporan Penjualan Tahunan</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('laporan.tahunan') }}" method="post">
+                            @csrf
+                            @php
+                                $now = \Carbon\Carbon::parse(now())->year;
+                            @endphp
+                            <div class="row mb-2">
+                                <div class="col mb-6 mt-2">
+                                    <div class="form-floating form-floating-outline mb-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tahun</label>
+                                            <select class="form-select" name="tahun">
+                                                <option value=""> -- Pilih Tahun -- </option>
+                                                @for ($data = $now; $data > 2000; $data--)
+                                                    <option value="{{ $data }}">{{ $data }}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Download</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

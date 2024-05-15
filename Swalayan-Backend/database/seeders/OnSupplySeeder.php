@@ -20,6 +20,7 @@ class OnSupplySeeder extends Seeder
                 [
                     "produk_id" => "1",
                     "supplier_id" => "1",
+                    "tanggal" => fake()->date(),
                     "quantity" => fake()->numberBetween(50, 200),
                     "status" => $status[0],
                     "inventaris_id" => "1"
@@ -27,6 +28,7 @@ class OnSupplySeeder extends Seeder
                 [
                     "produk_id" => "2",
                     "supplier_id" => "1",
+                    "tanggal" => fake()->date(),
                     "quantity" => fake()->numberBetween(50, 200),
                     "status" => $status[0],
                     "inventaris_id" => "1"

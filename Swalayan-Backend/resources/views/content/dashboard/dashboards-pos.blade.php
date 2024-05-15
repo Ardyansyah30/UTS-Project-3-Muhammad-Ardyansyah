@@ -16,268 +16,114 @@
 
 @section('content')
     <div class="row gy-4">
+        @if ($transaksis)
+            <!-- Data Tables -->
+            <div class="col-12">
+                <div class="card">
+                    <form action="{{ route('transaksi.store') }}" method="post">
+                        @csrf
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="text-truncate">No</th>
+                                        <th class="text-truncate">ID Produk</th>
+                                        <th class="text-truncate">Nama Produk</th>
+                                        <th class="text-truncate">Quantity</th>
+                                        <th class="text-truncate">Biaya</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $total = 0;
+                                    @endphp
+                                    @foreach ($transaksis as $transaksi)
+                                        <tr>
+                                            <th class="text-truncate">{{ $loop->index + 1 }}</th>
+                                            <input type="hidden" name="produk_id[]" value="{{ $transaksi['id_produk'] }}">
+                                            <th class="text-truncate">{{ $transaksi['id_produk'] }}</th>
+                                            <th class="text-truncate">{{ $transaksi['nama_produk'] }}</th>
+                                            <input type="hidden" name="quantity[]" value="{{ $transaksi['quantity'] }}">
+                                            <th class="text-truncate">{{ $transaksi['quantity'] }}</th>
+                                            <input type="hidden" name="biaya[]" value="{{ $transaksi['biaya'] }}">
+                                            <th class="text-truncate">{{ 'Rp' . $transaksi['biaya'] }}</th>
+                                        </tr>
+                                        @php
+                                            $total = $total + $transaksi['biaya'];
+                                        @endphp
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
 
-        <!-- Transactions -->
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h5 class="card-title m-0 me-2">Transactions</h5>
-                        <div class="dropdown">
-                            <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical mdi-24px"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                                <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Update</a>
+                        <div class="card-content">
+                            <div class="row mt-2 mb-3 ms-2">
+                                <label class="col-sm-2 col-form-label"><b>Total Biaya</b></label>
+                                <label class="col-sm-1 col-form-label">:</label>
+                                <input type="hidden" name="total" value="{{ $total }}">
+                                <label class="col-sm-8 col-form-label">{{ 'Rp' . $total }}</label>
                             </div>
                         </div>
-                    </div>
-                    <p class="mt-3"><span class="fw-medium">Total 48.5% growth</span> 😎 this month</p>
-                </div>
-                <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-md-3 col-6">
-                            <div class="d-flex align-items-center">
-                                <div class="avatar">
-                                    <div class="avatar-initial bg-primary rounded shadow">
-                                        <i class="mdi mdi-trending-up mdi-24px"></i>
-                                    </div>
-                                </div>
-                                <div class="ms-3">
-                                    <div class="small mb-1">Sales</div>
-                                    <h5 class="mb-0">245k</h5>
-                                </div>
-                            </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Finish Transaction</button>
                         </div>
-                        <div class="col-md-3 col-6">
-                            <div class="d-flex align-items-center">
-                                <div class="avatar">
-                                    <div class="avatar-initial bg-success rounded shadow">
-                                        <i class="mdi mdi-account-outline mdi-24px"></i>
-                                    </div>
-                                </div>
-                                <div class="ms-3">
-                                    <div class="small mb-1">Customers</div>
-                                    <h5 class="mb-0">12.5k</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="d-flex align-items-center">
-                                <div class="avatar">
-                                    <div class="avatar-initial bg-warning rounded shadow">
-                                        <i class="mdi mdi-cellphone-link mdi-24px"></i>
-                                    </div>
-                                </div>
-                                <div class="ms-3">
-                                    <div class="small mb-1">Product</div>
-                                    <h5 class="mb-0">1.54k</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="d-flex align-items-center">
-                                <div class="avatar">
-                                    <div class="avatar-initial bg-info rounded shadow">
-                                        <i class="mdi mdi-currency-usd mdi-24px"></i>
-                                    </div>
-                                </div>
-                                <div class="ms-3">
-                                    <div class="small mb-1">Revenue</div>
-                                    <h5 class="mb-0">$88k</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </div>
-        <!--/ Transactions -->
+            <!--/ Data Tables -->
+        @else
+            <!-- Point of Sales -->
+            <div class="col-lg-12">
 
-        <!-- Data Tables -->
-        <div class="col-12">
-            <div class="card">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class="table-light">
-                            <tr>
-                                <th class="text-truncate">User</th>
-                                <th class="text-truncate">Email</th>
-                                <th class="text-truncate">Role</th>
-                                <th class="text-truncate">Age</th>
-                                <th class="text-truncate">Salary</th>
-                                <th class="text-truncate">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm me-3">
-                                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Avatar"
-                                                class="rounded-circle">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-truncate">Jordan Stevenson</h6>
-                                            <small class="text-truncate">@amiccoo</small>
-                                        </div>
+                @if (session()->has('pesan'))
+                    <div class="alert alert-success mb-4 col-md-12" role="alert">
+                        {{ session('pesan') }}
+                    </div>
+                @endif
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="card-title m-0 me-2">Point of Sales</h5>
+                        </div>
+                    </div>
+                    @csrf
+                    <form action="{{ route('transaksi') }}" method="post">
+                        @csrf
+                        <div id="item" class="card-body">
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6 col-6 me-3">
+                                    <select name="id_produk[]" id="largeSelect" class="form-select form-select-lg" required>
+                                        <option value=""> -- Pilh Produk -- </option>
+                                        @foreach ($produks as $produk)
+                                            <option value="{{ $produk->id_produk }}" @selected(old('id_produk') == $produk->id_produk)>
+                                                {{ $produk->nama_produk }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-3 me-3">
+                                    <div class="form-floating form-floating-outline">
+                                        <input name="quantity[]" value="{{ old('quantity') }}" type="number"
+                                            class="form-control" id="floatingInput" placeholder="100"
+                                            aria-describedby="floatingInputHelp" required />
+                                        <label for="floatingInput">Quantity</label>
                                     </div>
-                                </td>
-                                <td class="text-truncate">susanna.Lind57@gmail.com</td>
-                                <td class="text-truncate"><i class="mdi mdi-laptop mdi-24px text-danger me-1"></i> Admin
-                                </td>
-                                <td class="text-truncate">24</td>
-                                <td class="text-truncate">34500$</td>
-                                <td><span class="badge bg-label-warning rounded-pill">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm me-3">
-                                            <img src="{{ asset('assets/img/avatars/3.png') }}" alt="Avatar"
-                                                class="rounded-circle">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-truncate">Benedetto Rossiter</h6>
-                                            <small class="text-truncate">@brossiter15</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">estelle.Bailey10@gmail.com</td>
-                                <td class="text-truncate"><i class="mdi mdi-pencil-outline text-info mdi-24px me-1"></i>
-                                    Editor</td>
-                                <td class="text-truncate">29</td>
-                                <td class="text-truncate">64500$</td>
-                                <td><span class="badge bg-label-success rounded-pill">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm me-3">
-                                            <img src="{{ asset('assets/img/avatars/2.png') }}" alt="Avatar"
-                                                class="rounded-circle">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-truncate">Bentlee Emblin</h6>
-                                            <small class="text-truncate">@bemblinf</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">milo86@hotmail.com</td>
-                                <td class="text-truncate"><i class="mdi mdi-cog-outline text-warning mdi-24px me-1"></i>
-                                    Author</td>
-                                <td class="text-truncate">44</td>
-                                <td class="text-truncate">94500$</td>
-                                <td><span class="badge bg-label-success rounded-pill">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm me-3">
-                                            <img src="{{ asset('assets/img/avatars/5.png') }}" alt="Avatar"
-                                                class="rounded-circle">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-truncate">Bertha Biner</h6>
-                                            <small class="text-truncate">@bbinerh</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">lonnie35@hotmail.com</td>
-                                <td class="text-truncate"><i class="mdi mdi-pencil-outline text-info mdi-24px me-1"></i>
-                                    Editor</td>
-                                <td class="text-truncate">19</td>
-                                <td class="text-truncate">4500$</td>
-                                <td><span class="badge bg-label-warning rounded-pill">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm me-3">
-                                            <img src="{{ asset('assets/img/avatars/4.png') }}" alt="Avatar"
-                                                class="rounded-circle">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-truncate">Beverlie Krabbe</h6>
-                                            <small class="text-truncate">@bkrabbe1d</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">ahmad_Collins@yahoo.com</td>
-                                <td class="text-truncate"><i class="mdi mdi-chart-donut mdi-24px text-success me-1"></i>
-                                    Maintainer</td>
-                                <td class="text-truncate">22</td>
-                                <td class="text-truncate">10500$</td>
-                                <td><span class="badge bg-label-success rounded-pill">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm me-3">
-                                            <img src="{{ asset('assets/img/avatars/7.png') }}" alt="Avatar"
-                                                class="rounded-circle">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-truncate">Bradan Rosebotham</h6>
-                                            <small class="text-truncate">@brosebothamz</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">tillman.Gleason68@hotmail.com</td>
-                                <td class="text-truncate"><i class="mdi mdi-pencil-outline text-info mdi-24px me-1"></i>
-                                    Editor</td>
-                                <td class="text-truncate">50</td>
-                                <td class="text-truncate">99500$</td>
-                                <td><span class="badge bg-label-warning rounded-pill">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm me-3">
-                                            <img src="{{ asset('assets/img/avatars/6.png') }}" alt="Avatar"
-                                                class="rounded-circle">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-truncate">Bree Kilday</h6>
-                                            <small class="text-truncate">@bkildayr</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">otho21@gmail.com</td>
-                                <td class="text-truncate"><i
-                                        class="mdi mdi-account-outline mdi-24px text-primary me-1"></i> Subscriber</td>
-                                <td class="text-truncate">23</td>
-                                <td class="text-truncate">23500$</td>
-                                <td><span class="badge bg-label-success rounded-pill">Active</span></td>
-                            </tr>
-                            <tr class="border-transparent">
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-sm me-3">
-                                            <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Avatar"
-                                                class="rounded-circle">
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-truncate">Breena Gallemore</h6>
-                                            <small class="text-truncate">@bgallemore6</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-truncate">florencio.Little@hotmail.com</td>
-                                <td class="text-truncate"><i
-                                        class="mdi mdi-account-outline mdi-24px text-primary me-1"></i> Subscriber</td>
-                                <td class="text-truncate">33</td>
-                                <td class="text-truncate">20500$</td>
-                                <td><span class="badge bg-label-secondary rounded-pill">Inactive</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                </div>
+                                <div class="col-md-2 col-3">
+                                    <button id="add" class="btn btn-primary">Add</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
-        </div>
-        <!--/ Data Tables -->
+            <!--/ Point of Sales -->
+        @endif
     </div>
 @endsection

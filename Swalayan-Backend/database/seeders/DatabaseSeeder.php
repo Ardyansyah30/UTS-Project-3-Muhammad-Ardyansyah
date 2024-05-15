@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(30)->create();
 
-        \App\Models\Supplier::factory(30)->create();
+        \App\Models\Supplier::factory(3)->create();
 
         \App\Models\User::factory()->create([
             'email' => 'admin@gmail.com',
@@ -80,12 +80,11 @@ class DatabaseSeeder extends Seeder
             'user_id' => '4'
         ]);
 
-        $this->call([
-            CategorySeeder::class,
-            ProductSeeder::class,
-            OnSupplySeeder::class,
-            TransaksiSeeder::class,
-            DetailTransaksiSeeder::class,
-        ]);
+        // $this->call([
+            // CategorySeeder::class,
+            // ProductSeeder::class,
+            // TransaksiSeeder::class,
+            // DetailTransaksiSeeder::class,
+        // ]);
     }
 }

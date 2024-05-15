@@ -20,11 +20,6 @@
                         <label class="col-sm-8 col-form-label">{{ $supplier->nama_supplier }}</label>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Nama Inventaris</label>
-                        <label class="col-sm-1 col-form-label">:</label>
-                        <label class="col-sm-8 col-form-label">{{ $inventaris = ($supplier->onSupply[0]->inventaris) ?  $supplier->onSupply[0]->inventaris->nama : "Inventaris Deleted" ; }}</label>
-                    </div>
-                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">No. HP</label>
                         <label class="col-sm-1 col-form-label">:</label>
                         <label class="col-sm-8 col-form-label">{{ $supplier->no_hp }}</label>
@@ -38,7 +33,6 @@
             </div>
         </div>
 
-
         <div class="col-xxl-10">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
@@ -50,14 +44,17 @@
                             <thead>
                                 <tr>
                                     <th>Produk</th>
+                                    <th>Tanggal</th>
                                     <th>Quantity</th>
                                     <th>Status</th>
+                                    <th>PJ Inventaris</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($supplier->onSupply as $supplying)
                                     <tr>
                                         <td>{{ $supplying->produk->nama_produk }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($supplying->tanggal)->format('d F Y') }}</td>
                                         <td>{{ $supplying->quantity }}</td>
                                         <td>
                                             @if ($supplying->status === 'Ordering')
@@ -70,6 +67,8 @@
                                                 <span
                                                     class="badge rounded-pill bg-label-success me-1">{{ $supplying->status }}</span>
                                             @endif
+                                        </td>
+                                        <td>{{ $inventaris = $supplying->inventaris ? $supplying->inventaris->nama : 'No Inventaris Data' }}
                                         </td>
                                     </tr>
                                 @endforeach

@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('on_supply', function (Blueprint $table) {
             $table->unsignedInteger('produk_id');
             $table->foreign('produk_id')->references('id_produk')->on('produk');
-            $table->unsignedInteger('supplier_id');
+            $table->unsignedInteger('supplier_id')->nullable();
             $table->foreign('supplier_id')->references('id_supplier')->on('supplier');
+            $table->date('tanggal');
             $table->integer('quantity');
             $table->string('status', 12);
             $table->unsignedInteger('inventaris_id')->nullable();

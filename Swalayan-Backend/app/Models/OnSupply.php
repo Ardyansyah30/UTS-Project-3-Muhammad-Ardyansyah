@@ -11,8 +11,13 @@ class OnSupply extends Model
   use HasFactory;
 
   protected $table = 'on_supply';
-  protected $fillable = ['produk_id', 'supplier_id', 'quantity', 'status', 'inventaris_id'];
+  protected $fillable = ['produk_id', 'supplier_id', 'tanggal', 'quantity', 'status', 'inventaris_id'];
   public $timestamps = false;
+
+  public function supplier(): BelongsTo
+  {
+    return $this->belongsTo(Supplier::class, 'supplier_id', 'id_supplier');
+  }
 
   public function produk(): BelongsTo
   {

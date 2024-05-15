@@ -32,9 +32,23 @@
                         $activeClass = null;
                         $currentRouteName = Route::currentRouteName();
 
+                        if ($currentRouteName === 'admin.supplier.show') {
+                            $currentRouteName = 'admin.supplier.index';
+                        } elseif ($currentRouteName === 'admin.produk.show') {
+                            $currentRouteName = 'admin.produk.index';
+                        } elseif ($currentRouteName === 'admin.transaksi.show') {
+                            $currentRouteName = 'admin.transaksi.index';
+                        }
+
                         if ($currentRouteName === $menu->slug) {
                             $activeClass = 'active';
                         } elseif (isset($menu->submenu)) {
+                            if (Auth()->user()->role === 'Admin') {
+                                if ($currentRouteName === 'users.show') {
+                                    $currentRouteName = 'users.index';
+                                }
+                            }
+
                             if (gettype($menu->slug) === 'array') {
                                 foreach ($menu->slug as $slug) {
                                     if (
@@ -92,6 +106,16 @@
                     @php
                         $activeClass = null;
                         $currentRouteName = Route::currentRouteName();
+
+                        if ($currentRouteName === 'kategori.index' && $menu->slug === 'produk') {
+                            $menu->slug = 'kategori';
+                        } elseif ($currentRouteName === 'kategori.create' && $menu->slug === 'produk') {
+                            $menu->slug = 'kategori';
+                        } elseif ($currentRouteName === 'kategori.show' && $menu->slug === 'produk') {
+                            $menu->slug = 'kategori';
+                        } elseif ($currentRouteName === 'kategori.edit' && $menu->slug === 'produk') {
+                            $menu->slug = 'kategori';
+                        }
 
                         if ($currentRouteName === $menu->slug) {
                             $activeClass = 'active';
@@ -153,6 +177,16 @@
                     @php
                         $activeClass = null;
                         $currentRouteName = Route::currentRouteName();
+
+                        if ($currentRouteName === 'transaksi.index') {
+                            $currentRouteName = 'transaksi';
+                        } elseif ($currentRouteName === 'transaksi.show') {
+                            $currentRouteName = 'transaksi';
+                        } elseif ($currentRouteName === 'pos-online.index') {
+                            $currentRouteName = 'pos-online';
+                        } elseif ($currentRouteName === 'pos-online.show') {
+                            $currentRouteName = 'pos-online';
+                        }
 
                         if ($currentRouteName === $menu->slug) {
                             $activeClass = 'active';
